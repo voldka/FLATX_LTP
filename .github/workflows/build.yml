@@ -13,9 +13,14 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
-      # The analysis requires to retrieve dependencies and build successfully
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.x'  # Specify the Flutter version you need; adjust as necessary
+      - name: Get dependencies
+        run: flutter pub get
       - name: Build
-        run: flutter run
+        run: flutter build apk  # Change to your target platform if not Android (e.g., flutter build ios for iOS)
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@v6
         env:
