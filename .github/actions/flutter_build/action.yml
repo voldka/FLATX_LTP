@@ -79,8 +79,10 @@ runs:
 
     - name: Build AppFlowy
       working-directory: frontend
-      run: cargo make --profile ${{ inputs.flutter_profile }} appflowy-core-dev
+      run: cargo make --profile "$FLUTTER_PROFILE" appflowy-core-dev
       shell: bash
+      env:
+        FLUTTER_PROFILE: ${{ inputs.flutter_profile }}
 
     - name: Run code generation
       working-directory: frontend
