@@ -21,7 +21,8 @@ jobs:
         run: flutter pub get
       - name: Build
         run: flutter build apk  # Change to your target platform if not Android (e.g., flutter build ios for iOS)
-      - name: SonarQube Scan
-        uses: SonarSource/sonarqube-scan-action@v6
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
         env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed for PR information
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
